@@ -41,25 +41,3 @@ public:
         }
     }
 };
-
-template <class T>
-T dot(const SparseVector<T>& a, const SparseVector<T>& b) {
-    T sum = 0;
-
-    auto ia = a.indices.begin();
-    auto ib = b.indices.begin();
-    auto va = a.values.begin();
-    auto vb = b.values.begin();
-
-    // skip unnecessary multiplications for sparsity
-    while (ia != a.indices.end() && ib != b.indices.end()) {
-        if (*ia < *ib) { ++ia; ++va; }
-        else if (*ib < *ia) { ++ib; ++vb; }
-        else {
-            sum += (*va) * (*vb);
-            ++ia; ++va;
-            ++ib; ++vb;
-        }
-    }
-    return sum;
-}

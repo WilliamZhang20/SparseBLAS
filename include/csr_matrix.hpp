@@ -10,9 +10,9 @@ public:
     int nrows = 0;
     int ncols = 0;
 
-    std::vector<int> rowptr;
-    std::vector<int> colind;
-    std::vector<T> values;
+    std::vector<int> rowptr; // starting position of each row in values array
+    std::vector<int> colind; // column index for each value 
+    std::vector<T> values; // all non-zero values
 
     CSRMatrix() = default;
 
@@ -43,5 +43,3 @@ public:
         return std::views::zip(col_slice, val_slice);
     }
 };
-
-// Sparse matrix-vector multiply: y = A*x
